@@ -1,4 +1,4 @@
-package com.raudonikis.androidskeleton
+package com.raudonikis.currencyexchanger
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

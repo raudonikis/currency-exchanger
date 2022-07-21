@@ -1,4 +1,4 @@
-package com.raudonikis.androidskeleton
+package com.raudonikis.currencyexchanger
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

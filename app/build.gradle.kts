@@ -24,7 +24,7 @@ android {
     lint {
         checkReleaseBuilds = false
     }
-    namespace = "com.raudonikis.androidskeleton"
+    namespace = "com.raudonikis.currencyexchanger"
 }
 
 dependencies {
