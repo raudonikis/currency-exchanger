@@ -28,6 +28,9 @@ object Versions {
     const val fastAdapter = "5.6.0"
     const val material = "1.6.1"
 
+    // Lifecycle
+    const val lifecycle = "2.5.0"
+
     // Kotlin
     const val ktxCore = "1.7.0"
     const val kotlin = "1.6.21"
@@ -83,8 +86,10 @@ object Dependencies {
 
     // UI
     const val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
-
     const val material = "com.google.android.material:material:${Versions.material}"
+
+    // Lifecycle
+    const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
 
     // Kotlin
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktxCore}"

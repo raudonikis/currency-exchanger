@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.raudonikis.data.models.CurrencyType
 
-@Entity(tableName = "balances")
-data class BalanceEntity(
+@Entity(tableName = "currency_balances")
+data class CurrencyBalanceEntity(
     @PrimaryKey
     @ColumnInfo(name = "currency_type")
     val currencyType: CurrencyType,

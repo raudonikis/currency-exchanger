@@ -2,16 +2,16 @@ package com.raudonikis.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.raudonikis.data.daos.BalancesDao
+import com.raudonikis.data.daos.CurrencyBalancesDao
 import com.raudonikis.data.daos.CurrencyRatesDao
 import com.raudonikis.data.daos.CurrencyTransactionsDao
-import com.raudonikis.data.entities.BalanceEntity
+import com.raudonikis.data.entities.CurrencyBalanceEntity
 import com.raudonikis.data.entities.CurrencyRateEntity
 import com.raudonikis.data.entities.CurrencyTransactionEntity
 
 @Database(
     entities = [
-        BalanceEntity::class,
+        CurrencyBalanceEntity::class,
         CurrencyRateEntity::class,
         CurrencyTransactionEntity::class,
     ],
@@ -20,7 +20,7 @@ import com.raudonikis.data.entities.CurrencyTransactionEntity
 )
 abstract class CurrencyExchangerDatabase : RoomDatabase() {
 
-    abstract fun balancesDao(): BalancesDao
+    abstract fun balancesDao(): CurrencyBalancesDao
     abstract fun currencyRatesDao(): CurrencyRatesDao
     abstract fun currencyTransactionsDao(): CurrencyTransactionsDao
 

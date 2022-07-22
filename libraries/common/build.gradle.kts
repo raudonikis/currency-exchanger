@@ -19,6 +19,8 @@ dependencies {
     api(Dependencies.constraintLayout)
     api(Dependencies.recyclerView)
     api(Dependencies.material)
+    // Lifecycle
+    api(Dependencies.lifecycle)
     // Logging
     api(Dependencies.timber)
 }

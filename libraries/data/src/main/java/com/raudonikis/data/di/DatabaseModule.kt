@@ -3,7 +3,7 @@ package com.raudonikis.data.di
 import android.content.Context
 import androidx.room.Room
 import com.raudonikis.data.CurrencyExchangerDatabase
-import com.raudonikis.data.daos.BalancesDao
+import com.raudonikis.data.daos.CurrencyBalancesDao
 import com.raudonikis.data.daos.CurrencyRatesDao
 import com.raudonikis.data.daos.CurrencyTransactionsDao
 import dagger.Module
@@ -29,7 +29,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideBalancesDao(database: CurrencyExchangerDatabase): BalancesDao {
+    fun provideBalancesDao(database: CurrencyExchangerDatabase): CurrencyBalancesDao {
         return database.balancesDao()
     }
 
