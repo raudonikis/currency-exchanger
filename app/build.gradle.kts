@@ -30,7 +30,7 @@ android {
 dependencies {
     implementation(project(Modules.Libraries.common))
     implementation(project(Modules.Libraries.navigation))
-    implementation(project(Modules.Features.home))
+    implementation(project(Modules.Features.currencyExchange))
     implementation(project(Modules.Features.dashboard))
     // Hilt
     implementation(Dependencies.daggerHilt)

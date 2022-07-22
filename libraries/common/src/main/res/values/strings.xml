@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Currency exchanger</string>
+
+    <string name="currency_exchange">Currency exchange</string>
+    <string name="sell">Sell</string>
+    <string name="receive">Receive</string>
+    <string name="currency">Currency</string>
+    <string name="currency_value_placeholder">0.0</string>
+</resources>

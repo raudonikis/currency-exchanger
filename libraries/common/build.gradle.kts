@@ -18,6 +18,7 @@ dependencies {
     api(Dependencies.appCompat)
     api(Dependencies.constraintLayout)
     api(Dependencies.recyclerView)
+    api(Dependencies.material)
     // Logging
     api(Dependencies.timber)
 }

@@ -8,7 +8,7 @@ object Modules {
     }
 
     object Features {
-        const val home = ":features:home"
+        const val currencyExchange = ":features:currency-exchange"
         const val dashboard = ":features:dashboard"
     }
 }

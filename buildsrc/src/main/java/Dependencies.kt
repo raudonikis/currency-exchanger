@@ -26,6 +26,7 @@ object Versions {
 
     // UI
     const val fastAdapter = "5.6.0"
+    const val material = "1.6.1"
 
     // Kotlin
     const val ktxCore = "1.7.0"
@@ -82,6 +83,8 @@ object Dependencies {
 
     // UI
     const val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
+
+    const val material = "com.google.android.material:material:${Versions.material}"
 
     // Kotlin
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktxCore}"
