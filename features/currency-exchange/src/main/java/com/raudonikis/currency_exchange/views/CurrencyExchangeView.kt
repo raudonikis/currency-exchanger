@@ -30,4 +30,8 @@ class CurrencyExchangeView(
     fun updateReceiveValue(newValue: Double) {
         binding.currencyExchangeReceive.updateReceiveValue(newValue)
     }
+
+    fun updateCommissionFee(fee: Double) {
+        binding.currencyExchangeCommissionFee.text = String.format("%.2f", fee)
+    }
 }

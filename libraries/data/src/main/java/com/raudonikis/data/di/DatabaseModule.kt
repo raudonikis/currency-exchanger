@@ -19,7 +19,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideExampleDatabase(@ApplicationContext appContext: Context): CurrencyExchangerDatabase {
+    fun provideCurrencyExchangerDatabase(@ApplicationContext appContext: Context): CurrencyExchangerDatabase {
         return Room.databaseBuilder(
             appContext,
             CurrencyExchangerDatabase::class.java,

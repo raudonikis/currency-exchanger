@@ -86,6 +86,8 @@ object Dependencies {
 
     // UI
     const val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
+    const val fastAdapterBindingExtensions =
+        "com.mikepenz:fastadapter-extensions-binding:${Versions.fastAdapter}"
     const val material = "com.google.android.material:material:${Versions.material}"
 
     // Lifecycle

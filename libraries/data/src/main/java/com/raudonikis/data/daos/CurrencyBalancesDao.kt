@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.raudonikis.data.entities.CurrencyEntity
+import com.raudonikis.data.models.CurrencyType
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -18,4 +19,7 @@ interface CurrencyBalancesDao {
 
     @Query("SELECT * FROM currencies")
     fun getAll(): Flow<List<CurrencyEntity>>
+
+    @Query("SELECT * FROM currencies WHERE currency_type=:currencyType LIMIT 1")
+    fun get(currencyType: CurrencyType): CurrencyEntity?
 }

@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.raudonikis.common.extensions.launchWhenStarted
 import com.raudonikis.common.extensions.viewBinding
 import com.raudonikis.currency_exchange.databinding.FragmentCurrencyExchangeBinding
+import com.raudonikis.currency_exchange.usecase.ConvertCurrencyResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
@@ -25,13 +26,21 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
     private fun setupObservers() {
         currencyExchangeViewModel.balances
             .onEach { balances ->
-                // todo show list of balances
+                binding.myBalancesView.updateMyBalances(balances)
             }
             .launchWhenStarted(viewLifecycleOwner)
         currencyExchangeViewModel.receiveValue
             .onEach { receiveValue ->
                 binding.currencyExchangeView.updateReceiveValue(receiveValue)
             }
+            .launchWhenStarted(viewLifecycleOwner)
+        currencyExchangeViewModel.commissionFee
+            .onEach { fee ->
+                binding.currencyExchangeView.updateCommissionFee(fee)
+            }
+            .launchWhenStarted(viewLifecycleOwner)
+        currencyExchangeViewModel.event
+            .onEach { onEvent(it) }
             .launchWhenStarted(viewLifecycleOwner)
     }
 
@@ -51,5 +60,9 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
                     currencyExchangeViewModel.onSellValueChanged(sellValue)
                 }
         }
+    }
+
+    private fun onEvent(event: ConvertCurrencyResult) {
+        // todo
     }
 }

@@ -5,11 +5,12 @@ import com.raudonikis.data.entities.CurrencyEntity
 
 object CurrencyMapper {
 
-    private fun map(from: CurrencyEntity): Currency {
+    fun map(from: CurrencyEntity?): Currency? {
+        from ?: return null
         return Currency(currencyType = from.currencyType, amount = from.amount)
     }
 
     fun map(from: List<CurrencyEntity>): List<Currency> {
-        return from.map { map(it) }
+        return from.mapNotNull { map(it) }
     }
 }

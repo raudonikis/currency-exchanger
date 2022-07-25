@@ -31,6 +31,7 @@
         android:layout_marginEnd="@dimen/spacing_small"
         android:background="@null"
         android:hint="@string/currency_value_placeholder"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="@id/sellCurrencyTypeDropdownView"
         app:layout_constraintEnd_toStartOf="@id/sellCurrencyTypeDropdownView"
         app:layout_constraintTop_toTopOf="@id/sellCurrencyTypeDropdownView" />

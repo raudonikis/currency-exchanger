@@ -20,4 +20,7 @@ dependencies {
     kapt(Dependencies.daggerCompiler)
     // Navigation
     implementation(Dependencies.navigationFragment)
+    // UI
+    implementation(Dependencies.fastAdapter)
+    implementation(Dependencies.fastAdapterBindingExtensions)
 }

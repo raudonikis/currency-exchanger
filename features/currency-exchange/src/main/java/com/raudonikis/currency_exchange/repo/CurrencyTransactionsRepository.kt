@@ -11,10 +11,15 @@ import javax.inject.Inject
 class CurrencyTransactionsRepository @Inject constructor(
     private val currencyTransactionsDao: CurrencyTransactionsDao
 ) {
+
     val transactions: Flow<List<CurrencyTransaction>> =
         currencyTransactionsDao.getAll().map { CurrencyTransactionMapper.map(it) }
 
-    suspend fun insert(transaction: CurrencyTransaction) {
-        currencyTransactionsDao.insertOrUpdate(CurrencyTransactionEntityMapper.map(transaction))
+    suspend fun insert() {
+        currencyTransactionsDao.insertOrUpdate(
+            CurrencyTransactionEntityMapper.map(
+                CurrencyTransaction()
+            )
+        )
     }
 }
