@@ -6,4 +6,6 @@
     <string name="receive">Receive</string>
     <string name="currency">Currency</string>
     <string name="currency_value_placeholder">0.0</string>
+    <string name="dialog_currency_converted_title">Currency converted</string>
+    <string name="dialog_currency_converted_message">You have converted %1$s to %2$s. Commission Fee - %3$s.</string>
 </resources>

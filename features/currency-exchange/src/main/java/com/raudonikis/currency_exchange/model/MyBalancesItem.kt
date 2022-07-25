@@ -17,7 +17,6 @@ class MyBalancesItem(
     }
 
     override fun bindView(binding: ItemMyBalanceBinding, payloads: List<Any>) {
-        binding.textMyBalanceItem.text =
-            "${String.format("%.2f", balance.amount)} ${balance.currencyType}"
+        binding.textMyBalanceItem.text = balance.toString()
     }
 }

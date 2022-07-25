@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.raudonikis.common.extensions.launchWhenStarted
 import com.raudonikis.common.extensions.viewBinding
 import com.raudonikis.currency_exchange.databinding.FragmentCurrencyExchangeBinding
@@ -63,6 +64,32 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
     }
 
     private fun onEvent(event: ConvertCurrencyResult) {
-        // todo
+        context?.let { context ->
+            when (event) {
+                // todo cleanup
+                is ConvertCurrencyResult.Success -> {
+                    MaterialAlertDialogBuilder(context)
+                        .setTitle(R.string.dialog_currency_converted_title)
+                        .setMessage(
+                            getString(
+                                R.string.dialog_currency_converted_message,
+                                event.from,
+                                event.to,
+                                event.fee,
+                            )
+                        )
+                        .setNeutralButton(android.R.string.ok) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
+                }
+                else -> MaterialAlertDialogBuilder(context)
+                    .setTitle("Failure")
+                    .setNeutralButton(android.R.string.ok) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+        }
     }
 }

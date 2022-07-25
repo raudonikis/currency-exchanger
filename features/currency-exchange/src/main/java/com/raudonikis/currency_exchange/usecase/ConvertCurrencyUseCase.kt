@@ -37,7 +37,11 @@ class ConvertCurrencyUseCase @Inject constructor(
             balancesRepository.update(updatedFrom)
             balancesRepository.update(updatedTo)
             transactionsRepository.insert()
-            return@withContext ConvertCurrencyResult.Success(from, to, commissionFee)
+            return@withContext ConvertCurrencyResult.Success(
+                from,
+                to,
+                Currency(currencyType = from.currencyType, amount = commissionFee)
+            )
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.raudonikis.common.formatters.CurrencyFormatter
 import com.raudonikis.currency_exchange.databinding.ViewCurrencyExchangeReceiveBinding
 import com.raudonikis.data.models.CurrencyType
 
@@ -20,6 +21,6 @@ class CurrencyExchangeReceiveView(
     }
 
     fun updateReceiveValue(newValue: Double) {
-        binding.textFieldCurrencyReceiveItem.text = String.format("%.2f", newValue)
+        binding.textFieldCurrencyReceiveItem.text = CurrencyFormatter.format(newValue)
     }
 }
