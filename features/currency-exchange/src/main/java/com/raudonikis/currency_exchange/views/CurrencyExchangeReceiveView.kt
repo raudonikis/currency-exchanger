@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.raudonikis.currency_exchange.databinding.ViewCurrencyExchangeReceiveBinding
+import com.raudonikis.data.models.CurrencyType
 
 class CurrencyExchangeReceiveView(
     context: Context,
@@ -13,4 +14,8 @@ class CurrencyExchangeReceiveView(
 
     private val binding =
         ViewCurrencyExchangeReceiveBinding.inflate(LayoutInflater.from(context), this, true)
+
+    fun onCurrencyTypeChanged(action: (item: CurrencyType) -> Unit) = apply {
+        binding.receiveCurrencyTypeDropdownView.onItemSelected { action(it) }
+    }
 }

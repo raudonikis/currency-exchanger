@@ -5,5 +5,9 @@ enum class CurrencyType {
     LTL,
     USD,
     GBP,
-    JPY,
+    JPY;
+
+    companion object {
+        val BASE_TYPE = EUR
+    }
 }

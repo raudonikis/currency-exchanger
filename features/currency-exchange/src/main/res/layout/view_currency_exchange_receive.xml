@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iconCurrencyExchangeItem"
+        android:id="@+id/iconCurrencyReceiveItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_arrow_up"
@@ -14,42 +14,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textCurrencyExchangeItem"
+        android:id="@+id/textCurrencyReceiveItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_small"
         android:text="@string/receive"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/iconCurrencyExchangeItem"
-        app:layout_constraintStart_toEndOf="@id/iconCurrencyExchangeItem"
-        app:layout_constraintTop_toTopOf="@id/iconCurrencyExchangeItem" />
+        app:layout_constraintBottom_toBottomOf="@id/iconCurrencyReceiveItem"
+        app:layout_constraintStart_toEndOf="@id/iconCurrencyReceiveItem"
+        app:layout_constraintTop_toTopOf="@id/iconCurrencyReceiveItem" />
 
     <TextView
-        android:id="@+id/textFieldCurrencyExchangeItem"
+        android:id="@+id/textFieldCurrencyReceiveItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_small"
         android:hint="@string/currency_value_placeholder"
-        app:layout_constraintBottom_toBottomOf="@id/dropdownCurrencyExchangeItem"
-        app:layout_constraintEnd_toStartOf="@id/dropdownCurrencyExchangeItem"
-        app:layout_constraintTop_toTopOf="@id/dropdownCurrencyExchangeItem" />
+        app:layout_constraintBottom_toBottomOf="@id/receiveCurrencyTypeDropdownView"
+        app:layout_constraintEnd_toStartOf="@id/receiveCurrencyTypeDropdownView"
+        app:layout_constraintTop_toTopOf="@id/receiveCurrencyTypeDropdownView" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dropdownCurrencyExchangeItem"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    <com.raudonikis.currency_exchange.views.CurrencyTypeDropdownView
+        android:id="@+id/receiveCurrencyTypeDropdownView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/currency"
-        app:layout_constraintBottom_toBottomOf="@id/iconCurrencyExchangeItem"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iconCurrencyExchangeItem">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="0dp"
@@ -57,6 +48,6 @@
         android:background="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/textCurrencyExchangeItem" />
+        app:layout_constraintStart_toStartOf="@id/textCurrencyReceiveItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

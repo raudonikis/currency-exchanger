@@ -5,11 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.raudonikis.data.models.CurrencyType
 
-@Entity(tableName = "currency_balances")
-data class CurrencyBalanceEntity(
+@Entity(tableName = "currencies")
+data class CurrencyEntity(
     @PrimaryKey
     @ColumnInfo(name = "currency_type")
     val currencyType: CurrencyType,
-    @ColumnInfo(name = "balance")
-    val balance: Double,
+    @ColumnInfo(name = "amount")
+    val amount: Double,
 )

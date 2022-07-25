@@ -9,6 +9,7 @@ import com.raudonikis.common.extensions.viewBinding
 import com.raudonikis.currency_exchange.databinding.FragmentCurrencyExchangeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 
 @AndroidEntryPoint
 class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
@@ -18,25 +19,36 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListeners()
         setupObservers()
     }
 
     private fun setupObservers() {
         currencyExchangeViewModel.balances
             .onEach { balances ->
-                // todo
+                // todo show list of balances
+            }
+            .launchWhenStarted(viewLifecycleOwner)
+        currencyExchangeViewModel.rate
+            .onEach { rate ->
+                Timber.d("New rate calculated -> $rate")
+                // todo update the receive value?
             }
             .launchWhenStarted(viewLifecycleOwner)
     }
 
-    private fun setupDropdowns() {
-        /*with(binding) {
-            // todo refactor
-            val items = com.raudonikis.data.entities.CurrencyType.values()
-            val adapter =
-                ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, items)
-            // (dropdownCurrencySell.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-            // (dropdownCurrencyReceive.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-        }*/
+    private fun setupListeners() {
+        with(binding) {
+            buttonSubmitCurrencyTransaction.setOnClickListener {
+                currencyExchangeViewModel.onSubmitTransaction()
+            }
+            currencyExchangeView
+                .onReceiveCurrencyTypeChanged { receiveType ->
+                    currencyExchangeViewModel.onReceiveCurrencyTypeChanged(receiveType)
+                }
+                .onSellCurrencyTypeChanged { sellType ->
+                    currencyExchangeViewModel.onSellCurrencyTypeChanged(sellType)
+                }
+        }
     }
 }

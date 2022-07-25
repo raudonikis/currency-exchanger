@@ -5,13 +5,13 @@ import androidx.room.RoomDatabase
 import com.raudonikis.data.daos.CurrencyBalancesDao
 import com.raudonikis.data.daos.CurrencyRatesDao
 import com.raudonikis.data.daos.CurrencyTransactionsDao
-import com.raudonikis.data.entities.CurrencyBalanceEntity
+import com.raudonikis.data.entities.CurrencyEntity
 import com.raudonikis.data.entities.CurrencyRateEntity
 import com.raudonikis.data.entities.CurrencyTransactionEntity
 
 @Database(
     entities = [
-        CurrencyBalanceEntity::class,
+        CurrencyEntity::class,
         CurrencyRateEntity::class,
         CurrencyTransactionEntity::class,
     ],
