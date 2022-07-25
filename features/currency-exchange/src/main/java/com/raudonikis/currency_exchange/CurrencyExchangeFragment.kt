@@ -9,7 +9,6 @@ import com.raudonikis.common.extensions.viewBinding
 import com.raudonikis.currency_exchange.databinding.FragmentCurrencyExchangeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 
 @AndroidEntryPoint
 class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
@@ -29,10 +28,9 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
                 // todo show list of balances
             }
             .launchWhenStarted(viewLifecycleOwner)
-        currencyExchangeViewModel.rate
-            .onEach { rate ->
-                Timber.d("New rate calculated -> $rate")
-                // todo update the receive value?
+        currencyExchangeViewModel.receiveValue
+            .onEach { receiveValue ->
+                binding.currencyExchangeView.updateReceiveValue(receiveValue)
             }
             .launchWhenStarted(viewLifecycleOwner)
     }
@@ -48,6 +46,9 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
                 }
                 .onSellCurrencyTypeChanged { sellType ->
                     currencyExchangeViewModel.onSellCurrencyTypeChanged(sellType)
+                }
+                .onSellValueChanged { sellValue ->
+                    currencyExchangeViewModel.onSellValueChanged(sellValue)
                 }
         }
     }

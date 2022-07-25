@@ -4,21 +4,22 @@ import com.raudonikis.currency_exchange.mapper.CurrencyRateEntityMapper
 import com.raudonikis.currency_exchange.mapper.CurrencyRateMapper
 import com.raudonikis.currency_exchange.model.CurrencyRate
 import com.raudonikis.data.daos.CurrencyRatesDao
+import com.raudonikis.data.entities.CurrencyRateEntity
 import com.raudonikis.data.models.CurrencyType
+import com.raudonikis.network.FixerApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class CurrencyRatesRepository @Inject constructor(
-    private val currencyRatesDao: CurrencyRatesDao
+    private val currencyRatesDao: CurrencyRatesDao,
+    private val fixerApi: FixerApi,
 ) {
-    val rates: Flow<List<CurrencyRate>> =
-        currencyRatesDao.getAll().map { CurrencyRateMapper.map(it) }
-
-    suspend fun update(rates: List<CurrencyRate>) {
-        currencyRatesDao.insertOrUpdate(CurrencyRateEntityMapper.map(rates))
-    }
 
     fun getRate(from: CurrencyType?, to: CurrencyType?): Flow<CurrencyRate?> {
         return when {
@@ -28,8 +29,24 @@ class CurrencyRatesRepository @Inject constructor(
             // TO BASE -> fetch the [from] rate and use reverse value
             to == CurrencyType.BASE_TYPE -> currencyRatesDao.getRate(from)
                 .map { currencyRateEntity -> currencyRateEntity?.copy(rate = 1 / currencyRateEntity.rate) }
-            // None of the values are BASE -> todo
-            else -> flowOf()
+            // None of the values are BASE -> divide from each other
+            else -> combine(
+                currencyRatesDao.getRate(to),
+                currencyRatesDao.getRate(from)
+            ) { rateTo, rateFrom ->
+                if (rateTo == null || rateFrom == null) {
+                    Timber.e("No rates have been found for [$to] and [$from]")
+                    return@combine null
+                }
+                CurrencyRateEntity(rateTo.currencyType, rate = rateTo.rate / rateFrom.rate)
+            }
         }.map { CurrencyRateMapper.map(it) }
+    }
+
+    suspend fun updateRates() {
+        withContext(Dispatchers.IO) {
+            val latestRates = fixerApi.latestRates()
+            currencyRatesDao.insertOrUpdate(CurrencyRateEntityMapper.map(latestRates))
+        }
     }
 }

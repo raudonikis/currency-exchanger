@@ -18,4 +18,8 @@ class CurrencyExchangeReceiveView(
     fun onCurrencyTypeChanged(action: (item: CurrencyType) -> Unit) = apply {
         binding.receiveCurrencyTypeDropdownView.onItemSelected { action(it) }
     }
+
+    fun updateReceiveValue(newValue: Double) {
+        binding.textFieldCurrencyReceiveItem.text = String.format("%.2f", newValue)
+    }
 }

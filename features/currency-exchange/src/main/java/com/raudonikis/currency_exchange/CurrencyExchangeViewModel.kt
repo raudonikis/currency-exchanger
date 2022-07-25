@@ -24,14 +24,9 @@ class CurrencyExchangeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val sellCurrency = MutableStateFlow<CurrencyType?>(null)
+    private val sellValue = MutableStateFlow<Double?>(null)
     private val receiveCurrency = MutableStateFlow<CurrencyType?>(null)
-
-    /**
-     * Observables
-     */
-
-    val balances = balancesRepository.balances
-    val rate: StateFlow<CurrencyRate?> = combine(
+    private val rate: StateFlow<CurrencyRate?> = combine(
         sellCurrency,
         receiveCurrency,
     ) { sellCurrency, receiveCurrency ->
@@ -40,6 +35,19 @@ class CurrencyExchangeViewModel @Inject constructor(
         .flatMapLatest { it }
         .flowOn(Dispatchers.IO)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), initialValue = null)
+
+    /**
+     * Observables
+     */
+    val balances = balancesRepository.balances
+    val receiveValue: StateFlow<Double> = combine(rate, sellValue) { rate, sellValue ->
+        if (rate == null || sellValue == null) {
+            return@combine 0.0
+        }
+        rate.rate * sellValue
+    }
+        .flowOn(Dispatchers.IO)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), initialValue = 0.0)
 
     /**
      * Events
@@ -51,6 +59,10 @@ class CurrencyExchangeViewModel @Inject constructor(
 
     fun onReceiveCurrencyTypeChanged(currency: CurrencyType) {
         receiveCurrency.value = currency
+    }
+
+    fun onSellValueChanged(sellValue: Double?) {
+        this.sellValue.value = sellValue
     }
 
     fun onSubmitTransaction() {

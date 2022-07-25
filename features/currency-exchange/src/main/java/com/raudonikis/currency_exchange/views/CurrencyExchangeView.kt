@@ -19,7 +19,15 @@ class CurrencyExchangeView(
         binding.currencyExchangeSell.onCurrencyTypeChanged(action)
     }
 
+    fun onSellValueChanged(action: (value: Double?) -> Unit) = apply {
+        binding.currencyExchangeSell.onSellValueChanged(action)
+    }
+
     fun onReceiveCurrencyTypeChanged(action: (item: CurrencyType) -> Unit) = apply {
         binding.currencyExchangeReceive.onCurrencyTypeChanged(action)
+    }
+
+    fun updateReceiveValue(newValue: Double) {
+        binding.currencyExchangeReceive.updateReceiveValue(newValue)
     }
 }

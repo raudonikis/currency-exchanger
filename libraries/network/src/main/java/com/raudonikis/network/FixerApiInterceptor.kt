@@ -12,7 +12,7 @@ internal class FixerApiInterceptor @Inject constructor() : Interceptor {
      * Here you can define every header to be added in API requests
      */
     private val headers: Map<String, String>
-        get() = mapOf()
+        get() = mapOf("apikey" to FIXER_API_KEY)
 
     /**
      * Here you can define every query to be added in API requests

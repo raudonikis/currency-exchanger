@@ -2,15 +2,15 @@ package com.raudonikis.network.responses
 
 import com.squareup.moshi.Json
 
-data class LatestRatesResponse(
+data class LatestCurrencyRatesResponse(
     @Json(name = "base")
-    val base: String? = null,
+    val base: String,
     @Json(name = "date")
-    val date: String? = null,
+    val date: String,
     @Json(name = "rates")
-    val rates: RatesResponse? = RatesResponse(),
+    val rates: Map<String, Double>,
     @Json(name = "success")
-    val success: Boolean? = null,
+    val success: Boolean,
     @Json(name = "timestamp")
-    val timestamp: Int? = null
+    val timestamp: Int
 )
