@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.raudonikis.common.formatters.CurrencyFormatter
 import com.raudonikis.currency_exchange.databinding.ViewCurrencyExchangeReceiveBinding
-import com.raudonikis.data.models.CurrencyType
+import com.raudonikis.common.model.CurrencyType
 
 class CurrencyExchangeReceiveView(
     context: Context,

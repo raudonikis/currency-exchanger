@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.raudonikis.common.model.CurrencyType
 import com.raudonikis.data.entities.CurrencyRateEntity
-import com.raudonikis.data.models.CurrencyType
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,6 +16,9 @@ interface CurrencyRatesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdate(currencyRates: List<CurrencyRateEntity>)
+
+    @Query("DELETE FROM currency_rates")
+    suspend fun deleteAll()
 
     @Query("SELECT * FROM currency_rates")
     fun getAll(): Flow<List<CurrencyRateEntity>>

@@ -1,12 +1,12 @@
 package com.raudonikis.currency_exchange.repo
 
 import com.raudonikis.common.coroutines.CoroutinesDispatcherProvider
+import com.raudonikis.common.model.CurrencyType
 import com.raudonikis.currency_exchange.mapper.CurrencyMapper
 import com.raudonikis.currency_exchange.mapper.CurrencyRateEntityMapper
 import com.raudonikis.currency_exchange.model.Currency
 import com.raudonikis.data.daos.CurrencyRatesDao
 import com.raudonikis.data.entities.CurrencyRateEntity
-import com.raudonikis.data.models.CurrencyType
 import com.raudonikis.network.FixerApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -50,7 +50,13 @@ class CurrencyRatesRepository @Inject constructor(
 
     suspend fun updateRates() {
         withContext(dispatchers.io) {
-            val latestRates = fixerApi.latestRates()
+            val latestRates = try {
+                fixerApi.latestRates()
+            } catch (e: Exception) {
+                Timber.e(e)
+                return@withContext
+            }
+            currencyRatesDao.deleteAll()
             currencyRatesDao.insertOrUpdate(CurrencyRateEntityMapper.map(latestRates))
         }
     }

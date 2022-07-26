@@ -16,7 +16,7 @@ import com.raudonikis.data.entities.CurrencyTransactionEntity
         CurrencyTransactionEntity::class,
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = false,
 )
 abstract class CurrencyExchangerDatabase : RoomDatabase() {
 

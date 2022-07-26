@@ -41,8 +41,8 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
                 binding.currencyExchangeView.updateCommissionFee(fee)
             }
             .launchWhenStarted(viewLifecycleOwner)
-        currencyExchangeViewModel.event
-            .onEach { onEvent(it) }
+        currencyExchangeViewModel.conversionResult
+            .onEach { onConversionResult(it) }
             .launchWhenStarted(viewLifecycleOwner)
         currencyExchangeViewModel.isValid
             .onEach { isValid -> binding.buttonSubmitCurrencyTransaction.enabledIf { isValid } }
@@ -67,33 +67,34 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
         }
     }
 
-    private fun onEvent(event: ConvertCurrencyResult) {
+    private fun onConversionResult(result: ConvertCurrencyResult) {
         context?.let { context ->
-            when (event) {
-                // todo cleanup
-                is ConvertCurrencyResult.Success -> {
-                    MaterialAlertDialogBuilder(context)
-                        .setTitle(R.string.dialog_currency_converted_title)
-                        .setMessage(
-                            getString(
-                                R.string.dialog_currency_converted_message,
-                                event.from,
-                                event.to,
-                                event.fee,
-                            )
-                        )
-                        .setNeutralButton(android.R.string.ok) { dialog, _ ->
-                            dialog.dismiss()
-                        }
-                        .show()
+            MaterialAlertDialogBuilder(context)
+                .setNeutralButton(android.R.string.ok) { dialog, _ ->
+                    dialog.dismiss()
                 }
-                else -> MaterialAlertDialogBuilder(context)
-                    .setTitle("Failure")
-                    .setNeutralButton(android.R.string.ok) { dialog, _ ->
-                        dialog.dismiss()
+                .apply {
+                    when (result) {
+                        is ConvertCurrencyResult.Success -> {
+                            setTitle(R.string.dialog_currency_converted_title)
+                            setMessage(
+                                getString(
+                                    R.string.dialog_currency_converted_message,
+                                    result.from,
+                                    result.to,
+                                    result.fee,
+                                )
+                            )
+                        }
+                        is ConvertCurrencyResult.FromBalanceNegative -> {
+                            setTitle(R.string.dialog_currency_converted_failure_title)
+                            setMessage(R.string.dialog_currency_converted_negative_failure_message)
+                        }
+                        is ConvertCurrencyResult.Error ->
+                            setTitle(R.string.dialog_currency_converted_failure_title)
                     }
-                    .show()
-            }
+                    show()
+                }
         }
     }
 }

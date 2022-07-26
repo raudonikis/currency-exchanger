@@ -18,6 +18,10 @@ class UserRepository @Inject constructor(
             }
         }
 
+    /**
+     * In reality user data would come from the backend,
+     * for the purposes of this task the data is prefilled on the first run
+     */
     suspend fun initializeUser() {
         if (isUserInitialized) {
             return

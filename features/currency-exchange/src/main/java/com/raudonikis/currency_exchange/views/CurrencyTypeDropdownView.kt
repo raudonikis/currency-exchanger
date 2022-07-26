@@ -8,7 +8,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.FrameLayout
 import com.raudonikis.currency_exchange.R
 import com.raudonikis.currency_exchange.databinding.ViewCurrencyTypeDropdownBinding
-import com.raudonikis.data.models.CurrencyType
+import com.raudonikis.common.model.CurrencyType
 
 class CurrencyTypeDropdownView(
     context: Context,

@@ -1,7 +1,7 @@
 package com.raudonikis.currency_exchange.model
 
 import com.raudonikis.common.formatters.CurrencyFormatter
-import com.raudonikis.data.models.CurrencyType
+import com.raudonikis.common.model.CurrencyType
 
 data class Currency(
     val currencyType: CurrencyType,

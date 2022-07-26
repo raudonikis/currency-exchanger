@@ -5,7 +5,7 @@ import com.raudonikis.currency_exchange.mapper.CurrencyEntityMapper
 import com.raudonikis.currency_exchange.mapper.CurrencyMapper
 import com.raudonikis.currency_exchange.model.Currency
 import com.raudonikis.data.daos.CurrencyBalancesDao
-import com.raudonikis.data.models.CurrencyType
+import com.raudonikis.common.model.CurrencyType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -28,6 +28,10 @@ class CurrencyBalancesRepository @Inject constructor(
         CurrencyMapper.map(currencyBalancesDao.get(currency))
     }
 
+    /**
+     * In reality user data would come from the backend,
+     * for the purposes of this task the data is prefilled on the first run
+     */
     suspend fun initializeBaseCurrency() {
         withContext(dispatchers.io) {
             update(Currency(CurrencyType.BASE_TYPE, BASE_CURRENCY_INITIAL))

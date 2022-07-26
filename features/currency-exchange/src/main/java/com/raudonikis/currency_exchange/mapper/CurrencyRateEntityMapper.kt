@@ -2,7 +2,7 @@ package com.raudonikis.currency_exchange.mapper
 
 import com.raudonikis.currency_exchange.model.Currency
 import com.raudonikis.data.entities.CurrencyRateEntity
-import com.raudonikis.data.models.CurrencyType
+import com.raudonikis.common.model.CurrencyType
 import com.raudonikis.network.responses.LatestCurrencyRatesResponse
 
 object CurrencyRateEntityMapper {
@@ -18,7 +18,7 @@ object CurrencyRateEntityMapper {
     fun map(from: LatestCurrencyRatesResponse): List<CurrencyRateEntity> {
         return from.rates.mapNotNull { entry ->
             val currencyType = try {
-                CurrencyType.valueOf(entry.key)
+                enumValueOf<CurrencyType>(entry.key)
             } catch (e: Exception) {
                 null
             } ?: return@mapNotNull null

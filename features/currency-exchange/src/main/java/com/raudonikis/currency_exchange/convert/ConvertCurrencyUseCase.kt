@@ -19,7 +19,6 @@ class ConvertCurrencyUseCase @Inject constructor(
         rate: Currency,
         commissionFee: Double,
     ): ConvertCurrencyResult {
-        // todo cleanup
         return withContext(dispatchers.io) {
             val sell = from.amount + commissionFee
             val receive = from.amount * rate.amount
@@ -34,6 +33,7 @@ class ConvertCurrencyUseCase @Inject constructor(
 
             val updatedFrom = fromBalance.copy(amount = fromBalance.amount - sell)
             val updatedTo = to.copy(amount = (toBalance?.amount ?: 0.0) + receive)
+
             balancesRepository.update(updatedFrom)
             balancesRepository.update(updatedTo)
             transactionsRepository.insert()
