@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -23,4 +25,7 @@ dependencies {
     api(Dependencies.lifecycle)
     // Logging
     api(Dependencies.timber)
+    // Hilt
+    implementation(Dependencies.daggerHilt)
+    kapt(Dependencies.daggerCompiler)
 }

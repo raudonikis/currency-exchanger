@@ -2,16 +2,15 @@ package com.raudonikis.currency_exchange
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.raudonikis.common.coroutines.CoroutinesDispatcherProvider
+import com.raudonikis.currency_exchange.balances.CurrencyBalancesRepository
+import com.raudonikis.currency_exchange.commissions.CurrencyCommissionUseCase
+import com.raudonikis.currency_exchange.convert.ConvertCurrencyResult
+import com.raudonikis.currency_exchange.convert.ConvertCurrencyUseCase
 import com.raudonikis.currency_exchange.model.Currency
-import com.raudonikis.currency_exchange.model.CurrencyRate
-import com.raudonikis.currency_exchange.repo.CurrencyBalancesRepository
 import com.raudonikis.currency_exchange.repo.CurrencyRatesRepository
-import com.raudonikis.currency_exchange.usecase.ConvertCurrencyResult
-import com.raudonikis.currency_exchange.usecase.ConvertCurrencyUseCase
-import com.raudonikis.currency_exchange.usecase.CurrencyCommissionUseCase
 import com.raudonikis.data.models.CurrencyType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,6 +20,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -31,20 +31,21 @@ class CurrencyExchangeViewModel @Inject constructor(
     balancesRepository: CurrencyBalancesRepository,
     ratesRepository: CurrencyRatesRepository,
     currencyCommissionUseCase: CurrencyCommissionUseCase,
+    dispatchers: CoroutinesDispatcherProvider,
     private val convertCurrencyUseCase: ConvertCurrencyUseCase,
 ) : ViewModel() {
 
     private val sellCurrency = MutableStateFlow<CurrencyType?>(null)
     private val sellValue = MutableStateFlow<Double?>(null)
     private val receiveCurrency = MutableStateFlow<CurrencyType?>(null)
-    private val rate: StateFlow<CurrencyRate?> = combine(
+    private val rate: StateFlow<Currency?> = combine(
         sellCurrency,
         receiveCurrency,
     ) { sellCurrency, receiveCurrency ->
         ratesRepository.getRate(sellCurrency, receiveCurrency)
     }
         .flatMapLatest { it }
-        .flowOn(Dispatchers.IO)
+        .flowOn(dispatchers.io)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), initialValue = null)
 
     /**
@@ -55,9 +56,9 @@ class CurrencyExchangeViewModel @Inject constructor(
         if (rate == null || sellValue == null) {
             return@combine 0.0
         }
-        rate.rate * sellValue
+        rate.amount * sellValue
     }
-        .flowOn(Dispatchers.IO)
+        .flowOn(dispatchers.io)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), initialValue = 0.0)
     val commissionFee: StateFlow<Double> =
         combine(sellCurrency, sellValue) { sellCurrency, sellValue ->
@@ -67,12 +68,19 @@ class CurrencyExchangeViewModel @Inject constructor(
             currencyCommissionUseCase.getCommissionFee(Currency(sellCurrency, sellValue))
         }
             .flatMapLatest { it }
-            .flowOn(Dispatchers.IO)
+            .flowOn(dispatchers.io)
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), initialValue = 0.0)
 
     private val _event = MutableSharedFlow<ConvertCurrencyResult>()
     val event = _event.asSharedFlow()
 
+    val isValid = receiveValue.map { it > 0 }.flowOn(dispatchers.io)
+
+    init {
+        /*viewModelScope.launch {
+            ratesRepository.updateRates()
+        }*/
+    }
     /**
      * Events
      */

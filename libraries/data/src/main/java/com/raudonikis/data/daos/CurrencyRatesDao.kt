@@ -21,5 +21,8 @@ interface CurrencyRatesDao {
     fun getAll(): Flow<List<CurrencyRateEntity>>
 
     @Query("SELECT * FROM currency_rates WHERE currency_type=:currencyType LIMIT 1")
-    fun getRate(currencyType: CurrencyType): Flow<CurrencyRateEntity?>
+    fun getRateFlow(currencyType: CurrencyType): Flow<CurrencyRateEntity?>
+
+    @Query("SELECT * FROM currency_rates WHERE currency_type=:currencyType LIMIT 1")
+    suspend fun getRate(currencyType: CurrencyType): CurrencyRateEntity?
 }

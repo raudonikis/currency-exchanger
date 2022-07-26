@@ -16,3 +16,7 @@ fun View.showIf(condition: () -> Boolean) {
         false -> hide()
     }
 }
+
+fun View.enabledIf(condition: () -> Boolean) {
+    isEnabled = condition()
+}

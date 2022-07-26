@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/textCurrencyExchangeTitle"
+        style="@style/Text.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/currency_exchange"
@@ -16,20 +17,21 @@
         android:id="@+id/currencyExchangeSell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
         app:layout_constraintTop_toBottomOf="@id/textCurrencyExchangeTitle" />
 
     <com.raudonikis.currency_exchange.views.CurrencyExchangeReceiveView
         android:id="@+id/currencyExchangeReceive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_medium"
         app:layout_constraintTop_toBottomOf="@id/currencyExchangeSell" />
 
     <TextView
         android:id="@+id/currencyExchangeCommissionFee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/currencyExchangeReceive"
         tools:text="Commission fee - 0.0" />

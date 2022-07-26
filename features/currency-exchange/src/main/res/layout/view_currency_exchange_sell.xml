@@ -4,14 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/iconCurrencySellItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow_up"
+        android:backgroundTint="@color/sell"
+        app:cardCornerRadius="@dimen/card_corner_radius_circle"
+        app:contentPadding="@dimen/spacing_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_up"
+            app:tint="@color/white" />
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/textCurrencySellItem"
@@ -24,31 +33,46 @@
         app:layout_constraintStart_toEndOf="@id/iconCurrencySellItem"
         app:layout_constraintTop_toTopOf="@id/iconCurrencySellItem" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldCurrencySellItem"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/spacing_small"
-        android:background="@null"
-        android:hint="@string/currency_value_placeholder"
-        android:inputType="numberDecimal"
+        android:layout_marginHorizontal="@dimen/spacing_small"
         app:layout_constraintBottom_toBottomOf="@id/sellCurrencyTypeDropdownView"
         app:layout_constraintEnd_toStartOf="@id/sellCurrencyTypeDropdownView"
-        app:layout_constraintTop_toTopOf="@id/sellCurrencyTypeDropdownView" />
+        app:layout_constraintStart_toEndOf="@id/textCurrencySellItem"
+        app:layout_constraintTop_toTopOf="@id/sellCurrencyTypeDropdownView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sell"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.raudonikis.currency_exchange.views.CurrencyTypeDropdownView
         android:id="@+id/sellCurrencyTypeDropdownView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textFieldCurrencySellItem"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:barrierMargin="@dimen/spacing_medium"
+        app:constraint_referenced_ids="sellCurrencyTypeDropdownView, iconCurrencySellItem" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toBottomOf="@id/barrierBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textCurrencySellItem" />
 

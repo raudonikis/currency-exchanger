@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.raudonikis.common.formatters.CurrencyFormatter
+import com.raudonikis.currency_exchange.R
 import com.raudonikis.currency_exchange.databinding.ViewCurrencyExchangeBinding
 import com.raudonikis.data.models.CurrencyType
 
@@ -33,6 +34,7 @@ class CurrencyExchangeView(
     }
 
     fun updateCommissionFee(fee: Double) {
-        binding.currencyExchangeCommissionFee.text = CurrencyFormatter.format(fee)
+        binding.currencyExchangeCommissionFee.text =
+            context.getString(R.string.commission_fee, CurrencyFormatter.format(fee))
     }
 }

@@ -2,10 +2,18 @@
     <string name="app_name">Currency exchanger</string>
 
     <string name="currency_exchange">Currency exchange</string>
+    <string name="currency">Currency</string>
+
+    <!-- Common -->
     <string name="sell">Sell</string>
     <string name="receive">Receive</string>
-    <string name="currency">Currency</string>
-    <string name="currency_value_placeholder">0.0</string>
+    <string name="submit">Submit</string>
+
+    <!-- Currency exchange -->
+    <string name="commission_fee">Commission fee - %1$s</string>
     <string name="dialog_currency_converted_title">Currency converted</string>
     <string name="dialog_currency_converted_message">You have converted %1$s to %2$s. Commission Fee - %3$s.</string>
+
+    <!-- My balances -->
+    <string name="my_balances_title">My balances</string>
 </resources>

@@ -5,10 +5,11 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.raudonikis.common.extensions.enabledIf
 import com.raudonikis.common.extensions.launchWhenStarted
 import com.raudonikis.common.extensions.viewBinding
+import com.raudonikis.currency_exchange.convert.ConvertCurrencyResult
 import com.raudonikis.currency_exchange.databinding.FragmentCurrencyExchangeBinding
-import com.raudonikis.currency_exchange.usecase.ConvertCurrencyResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
@@ -42,6 +43,9 @@ class CurrencyExchangeFragment : Fragment(R.layout.fragment_currency_exchange) {
             .launchWhenStarted(viewLifecycleOwner)
         currencyExchangeViewModel.event
             .onEach { onEvent(it) }
+            .launchWhenStarted(viewLifecycleOwner)
+        currencyExchangeViewModel.isValid
+            .onEach { isValid -> binding.buttonSubmitCurrencyTransaction.enabledIf { isValid } }
             .launchWhenStarted(viewLifecycleOwner)
     }
 

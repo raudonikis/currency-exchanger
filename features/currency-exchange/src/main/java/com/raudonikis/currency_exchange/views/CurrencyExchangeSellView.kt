@@ -21,7 +21,7 @@ class CurrencyExchangeSellView(
     }
 
     fun onSellValueChanged(action: (value: Double?) -> Unit) = apply {
-        binding.textFieldCurrencySellItem.doOnTextChanged { text, _, _, _ ->
+        binding.textFieldCurrencySellItem.editText?.doOnTextChanged { text, _, _, _ ->
             action(text?.toString()?.toDoubleOrNull())
         }
     }

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/spacing_medium">
 
-    <com.raudonikis.currency_exchange.views.MyBalancesView
+    <com.raudonikis.currency_exchange.balances.MyBalancesView
         android:id="@+id/myBalancesView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,13 +15,14 @@
         android:id="@+id/currencyExchangeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
         app:layout_constraintTop_toBottomOf="@id/myBalancesView" />
 
     <Button
         android:id="@+id/buttonSubmitCurrencyTransaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

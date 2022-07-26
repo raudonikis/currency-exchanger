@@ -10,10 +10,11 @@ dependencies {
     // DI
     implementation(Dependencies.daggerHilt)
     kapt(Dependencies.daggerCompiler)
-    // Room database
+    // Persistence
     api(Dependencies.room)
     api(Dependencies.roomExtensions)
     kapt(Dependencies.roomCompiler)
+    implementation(Dependencies.sharedPreferences)
 }
 android {
     namespace = "com.raudonikis.data"

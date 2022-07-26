@@ -1,4 +1,4 @@
-package com.raudonikis.currency_exchange.usecase
+package com.raudonikis.currency_exchange.convert
 
 import com.raudonikis.currency_exchange.model.Currency
 
