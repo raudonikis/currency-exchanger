@@ -4,6 +4,13 @@
 
 A demo android application for exchanging currencies.
 
+## How to build the app
+* Create an API key in https://apilayer.com/
+* Add the API key into local.properties:
+```
+FIXER_API_KEY="your_api_key"
+```
+
 ## Tech stack
 
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
