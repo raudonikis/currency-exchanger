@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/iconCurrencySellItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/sell"
+        app:cardCornerRadius="@dimen/card_corner_radius_circle"
+        app:contentPadding="@dimen/spacing_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_up"
+            app:tint="@color/white" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/textCurrencySellItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:text="@string/sell"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iconCurrencySellItem"
+        app:layout_constraintStart_toEndOf="@id/iconCurrencySellItem"
+        app:layout_constraintTop_toTopOf="@id/iconCurrencySellItem" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldCurrencySellItem"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_small"
+        app:layout_constraintBottom_toBottomOf="@id/sellCurrencyTypeDropdownView"
+        app:layout_constraintEnd_toStartOf="@id/sellCurrencyTypeDropdownView"
+        app:layout_constraintStart_toEndOf="@id/textCurrencySellItem"
+        app:layout_constraintTop_toTopOf="@id/sellCurrencyTypeDropdownView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sell"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.raudonikis.currency_exchange.views.CurrencyTypeDropdownView
+        android:id="@+id/sellCurrencyTypeDropdownView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textFieldCurrencySellItem"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:barrierMargin="@dimen/spacing_medium"
+        app:constraint_referenced_ids="sellCurrencyTypeDropdownView, iconCurrencySellItem" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toBottomOf="@id/barrierBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textCurrencySellItem" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

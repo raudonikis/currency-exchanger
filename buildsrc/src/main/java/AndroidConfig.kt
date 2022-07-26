@@ -1,5 +1,5 @@
 object AndroidConfig {
-    const val applicationId = "com.raudonikis.androidskeleton"
+    const val applicationId = "com.raudonikis.currencyexchanger"
     const val versionCode = 1
     const val versionName = "1.0"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"

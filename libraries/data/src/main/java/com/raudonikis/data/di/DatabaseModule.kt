@@ -2,8 +2,10 @@ package com.raudonikis.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.raudonikis.data.ExampleDatabase
-import com.raudonikis.data.daos.ExampleDao
+import com.raudonikis.data.CurrencyExchangerDatabase
+import com.raudonikis.data.daos.CurrencyBalancesDao
+import com.raudonikis.data.daos.CurrencyRatesDao
+import com.raudonikis.data.daos.CurrencyTransactionsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,17 +19,29 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideExampleDatabase(@ApplicationContext appContext: Context): ExampleDatabase {
+    fun provideCurrencyExchangerDatabase(@ApplicationContext appContext: Context): CurrencyExchangerDatabase {
         return Room.databaseBuilder(
             appContext,
-            ExampleDatabase::class.java,
-            ExampleDatabase.DATABASE_NAME
+            CurrencyExchangerDatabase::class.java,
+            CurrencyExchangerDatabase.DATABASE_NAME
         ).build()
     }
 
     @Provides
     @Singleton
-    fun provideExampleDao(exampleDatabase: ExampleDatabase): ExampleDao {
-        return exampleDatabase.exampleDao()
+    fun provideBalancesDao(database: CurrencyExchangerDatabase): CurrencyBalancesDao {
+        return database.balancesDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCurrencyRatesDao(database: CurrencyExchangerDatabase): CurrencyRatesDao {
+        return database.currencyRatesDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCurrencyTransactionsDao(database: CurrencyExchangerDatabase): CurrencyTransactionsDao {
+        return database.currencyTransactionsDao()
     }
 }

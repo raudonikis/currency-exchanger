@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textCurrencyExchangeTitle"
+        style="@style/Text.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/currency_exchange"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.raudonikis.currency_exchange.views.CurrencyExchangeSellView
+        android:id="@+id/currencyExchangeSell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        app:layout_constraintTop_toBottomOf="@id/textCurrencyExchangeTitle" />
+
+    <com.raudonikis.currency_exchange.views.CurrencyExchangeReceiveView
+        android:id="@+id/currencyExchangeReceive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        app:layout_constraintTop_toBottomOf="@id/currencyExchangeSell" />
+
+    <TextView
+        android:id="@+id/currencyExchangeCommissionFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/currencyExchangeReceive"
+        tools:text="Commission fee - 0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,8 @@
 package com.raudonikis.network.di
 
-import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
-import com.raudonikis.network.EXAMPLE_API_BASE_URL
-import com.raudonikis.network.ExampleApi
-import com.raudonikis.network.ExampleApiInterceptor
+import com.raudonikis.network.FIXER_API_BASE_URL
+import com.raudonikis.network.FixerApi
+import com.raudonikis.network.FixerApiInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,22 +19,21 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideExampleApiService(
+    fun provideFixerApiService(
         okHttpClient: OkHttpClient,
         moshiConverterFactory: MoshiConverterFactory
-    ): ExampleApi {
+    ): FixerApi {
         return Retrofit.Builder()
-            .baseUrl(EXAMPLE_API_BASE_URL)
+            .baseUrl(FIXER_API_BASE_URL)
             .client(okHttpClient)
-            .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(moshiConverterFactory)
             .build()
-            .create(ExampleApi::class.java)
+            .create(FixerApi::class.java)
     }
 
     @Provides
     internal fun provideOkHttpClient(
-        apiInterceptor: ExampleApiInterceptor,
+        apiInterceptor: FixerApiInterceptor,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()

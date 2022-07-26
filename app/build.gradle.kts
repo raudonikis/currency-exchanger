@@ -24,17 +24,18 @@ android {
     lint {
         checkReleaseBuilds = false
     }
-    namespace = "com.raudonikis.androidskeleton"
+    namespace = "com.raudonikis.currencyexchanger"
 }
 
 dependencies {
     implementation(project(Modules.Libraries.common))
-    implementation(project(Modules.Libraries.navigation))
-    implementation(project(Modules.Features.home))
-    implementation(project(Modules.Features.dashboard))
+    implementation(project(Modules.Features.currencyExchange))
     // Hilt
     implementation(Dependencies.daggerHilt)
     kapt(Dependencies.daggerCompiler)
+    // Navigation
+    api(Dependencies.navigationUi)
+    api(Dependencies.navigationFragment)
     // Testing
     testImplementation(Dependencies.jUnit)
     androidTestImplementation(Dependencies.jUnitTest)

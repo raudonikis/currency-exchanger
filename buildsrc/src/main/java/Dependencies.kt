@@ -13,10 +13,10 @@ object Versions {
     const val retrofit = "2.9.0"
     const val moshi = "1.13.0"
     const val okHttp = "4.9.0"
-    const val networkResponseAdapter = "5.0.0"
 
-    // Room database
+    // Persistence
     const val room = "2.4.2"
+    const val sharedPreferences = "1.2.0"
 
     // Navigation
     const val navigation = "2.4.2"
@@ -26,6 +26,10 @@ object Versions {
 
     // UI
     const val fastAdapter = "5.6.0"
+    const val material = "1.6.1"
+
+    // Lifecycle
+    const val lifecycle = "2.5.0"
 
     // Kotlin
     const val ktxCore = "1.7.0"
@@ -62,13 +66,12 @@ object Dependencies {
     const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
     const val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
     const val okHttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
-    const val networkResponseAdapter =
-        "com.github.haroldadmin:NetworkResponseAdapter:${Versions.networkResponseAdapter}"
 
-    // Room database
+    // Persistence
     const val room = "androidx.room:room-runtime:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     const val roomExtensions = "androidx.room:room-ktx:${Versions.room}"
+    const val sharedPreferences = "androidx.preference:preference:${Versions.sharedPreferences}"
 
     // Navigation
     const val navigationFragment =
@@ -82,6 +85,12 @@ object Dependencies {
 
     // UI
     const val fastAdapter = "com.mikepenz:fastadapter:${Versions.fastAdapter}"
+    const val fastAdapterBindingExtensions =
+        "com.mikepenz:fastadapter-extensions-binding:${Versions.fastAdapter}"
+    const val material = "com.google.android.material:material:${Versions.material}"
+
+    // Lifecycle
+    const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
 
     // Kotlin
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktxCore}"
