@@ -25,14 +25,10 @@ For more information about used dependencies, see [this](buildsrc/src/main/java/
 
 ## Project structure
 
-![project structure](project_structure.png)
-
 - app - main app module
 - buildSrc - special module for managing dependencies
 - features - package for feature modules
 - libraries - package for other modules (not feature related)
   - common - common logic between all or most modules
   - data - database, entities
-  - data-domain - domain models, mappers
-  - navigation - navigation handling logic
   - network - api interfaces, response models
