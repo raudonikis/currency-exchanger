@@ -3,13 +3,13 @@ package com.raudonikis.currency_exchange
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raudonikis.common.coroutines.CoroutinesDispatcherProvider
+import com.raudonikis.common.model.CurrencyType
 import com.raudonikis.currency_exchange.balances.CurrencyBalancesRepository
 import com.raudonikis.currency_exchange.commissions.CurrencyCommissionUseCase
 import com.raudonikis.currency_exchange.convert.ConvertCurrencyResult
 import com.raudonikis.currency_exchange.convert.ConvertCurrencyUseCase
 import com.raudonikis.currency_exchange.model.Currency
 import com.raudonikis.currency_exchange.repo.CurrencyRatesRepository
-import com.raudonikis.common.model.CurrencyType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
